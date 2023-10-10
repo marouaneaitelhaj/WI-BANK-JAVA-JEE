@@ -34,7 +34,15 @@ public class ClientServlet extends HttpServlet {
                 req.getRequestDispatcher("ClientPages/clientlist.jsp").forward(req, resp);
                 break;
             case "/updateclient":
-                req.getRequestDispatcher("ClientPages/update.jsp").forward(req, resp);
+                String code = req.getParameter("code");
+                Optional<Client> client = clientInter.findOne(new Client(code));
+                if (client.isEmpty()) {
+
+                } else {
+                    req.setAttribute("client", client.get());
+                    req.getRequestDispatcher("ClientPages/update.jsp").forward(req, resp);
+                }
+
                 break;
         }
     }
@@ -57,7 +65,27 @@ public class ClientServlet extends HttpServlet {
                 }
                 break;
             case "/updateclient":
-
+                Client client1 = new Client();
+                client1.setNom(req.getParameter("nom"));
+                client1.setPrenom(req.getParameter("prenom"));
+                client1.setDateDeNaissance(LocalDate.parse(req.getParameter("dateDeNaissance")));
+                client1.setTelephone(req.getParameter("telephone"));
+                client1.setCode(req.getParameter("code"));
+                System.out.println("helooooooo " + client1.getCode());
+                client1.setAdresse(req.getParameter("adresse"));
+                Optional<Client> optionalClient = clientInter.update(client1);
+                if (optionalClient.isEmpty()) {
+                } else {
+                    req.setAttribute("client", optionalClient.get());
+                    req.setAttribute("updated", true);
+                    req.getRequestDispatcher("ClientPages/update.jsp").forward(req, resp);
+                }
+                break;
+            case "/clientlist":
+                req.getParameter("atr");
+                List<Client> clientList = clientInter.findByAtr(req.getParameter("atr"));
+                req.setAttribute("clientList", clientList);
+                req.getRequestDispatcher("ClientPages/clientlist.jsp").forward(req, resp);
                 break;
         }
     }

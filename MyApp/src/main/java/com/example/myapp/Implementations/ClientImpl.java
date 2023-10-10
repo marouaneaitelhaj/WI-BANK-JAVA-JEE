@@ -45,7 +45,9 @@ public class ClientImpl implements ClientInter {
             statement.setString(4, client.getAdresse());
             statement.setDate(5, Date.valueOf(client.getDateDeNaissance().toString()));
             statement.setString(6, client.getCode());
-            statement.executeUpdate();
+            if (statement.executeUpdate()==0){
+                return Optional.empty();
+            }
             return Optional.of(client);
         } catch (Exception e) {
             System.out.println(e);
@@ -76,7 +78,7 @@ public class ClientImpl implements ClientInter {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, client.getCode());
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 client.setNom(resultSet.getString("nom"));
                 client.setPrenom(resultSet.getString("prenom"));
                 client.setTelephone(resultSet.getString("telephone"));
