@@ -9,37 +9,79 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-<jsp:include page="/Includes/header.jsp" />
-<div class="w-screen h-screen flex flex-col  items-center bg-amber-100 justify-around">
-    <div class="flex flex-col justify-around  rounded py-10 bg-amber-500 w-1/3	 ">
-        <div class="w-full flex justify-around">
-            <label for="nom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
-            <input type="text" id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
-        </div>
-        <div class="w-full flex justify-around">
-            <label for="prenom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prenom</label>
-            <input type="text" id="prenom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
-        </div>
-        <div class="w-full flex justify-around">
-            <label for="dateDeNaissance" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date De Naissance</label>
-            <input type="date" id="dateDeNaissance" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
-        </div>
-        <div class="w-full flex justify-around">
-            <label for="telephone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero de telephone</label>
-            <input type="text" id="telephone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
-        </div>
-        <div class="w-full flex justify-around">
-            <label for="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Code</label>
-            <input type="text" id="code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
-        </div>
-        <div class="w-full flex justify-around">
-            <label for="adresse" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adresse</label>
-            <input type="text" id="adresse" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
+<jsp:include page="/Includes/header.jsp"/>
+<form action="/addclient" method="post">
+    <div class="w-screen h-screen flex flex-col  items-center bg-amber-100 justify-around">
+        <div class="flex flex-col justify-around  rounded py-10 bg-amber-500 w-1/3	 ">
+            <div class="flex items-center w-full  mb-5 px-5">
+                <label for="nom" class="block mb-2 text-sm font-medium w-40 text-gray-900 dark:text-white">Nom :</label>
+                <input type="text" id="nom" name="nom"
+                       class="bg-gray-50 border border-gray-300 ml-5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="Montana" required>
+            </div>
+            <div class="flex items-center w-full  mb-5 px-5">
+                <label for="prenom" class="block mb-2 text-sm font-medium w-40 text-gray-900 dark:text-white">Prenom
+                    :</label>
+                <input type="text" id="prenom" name="prenom"
+                       class="bg-gray-50 border border-gray-300 ml-5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="Max b" required>
+            </div>
+            <div class="flex items-center w-full  mb-5 px-5">
+                <label for="dateDeNaissance" class="block mb-2 text-sm font-medium w-40 text-gray-900 dark:text-white">Date
+                    De
+                    Naissance :</label>
+                <input type="date" id="dateDeNaissance" name="dateDeNaissance"
+                       class="bg-gray-50 border border-gray-300 ml-5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="John" required>
+            </div>
+            <div class="flex items-center w-full  mb-5 px-5">
+                <label for="telephone" class="block mb-2 text-sm font-medium w-40 text-gray-900 dark:text-white">Numero
+                    de
+                    Telephone :</label>
+                <input type="text" id="telephone" name="telephone"
+                       class="bg-gray-50 border border-gray-300 ml-5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="+2126485533" required>
+            </div>
+            <div class="flex items-center w-full  mb-5 px-5">
+                <label for="code" class="block mb-2 text-sm font-medium w-40 text-gray-900 dark:text-white">Code
+                    :</label>
+                <input type="text" id="code" name="code"
+                       class="bg-gray-50 border border-gray-300 ml-5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="CXW765KJH789" required>
+            </div>
+            <div class="flex items-center w-full  mb-5 px-5">
+                <label for="adresse" class="block mb-2 text-sm font-medium w-40 text-gray-900 dark:text-white">Adresse
+                    :</label>
+                <input type="text" id="adresse" name="adresse"
+                       class="bg-gray-50 border border-gray-300 ml-5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="Attaouia , Zitouna, 181" required>
+            </div>
+            <div class="flex items-center w-full justify-center    mb-5 px-5">
+                <button class="bg-white py-1 px-10 w-48 rounded" type="submit">
+                    Create
+                </button>
+            </div>
         </div>
     </div>
-</div>
-<jsp:include page="/Includes/footer.jsp" />
+</form>
+<%
+    Boolean created = (Boolean) request.getAttribute("created");
+%>
+
+<% if (created != null && created) { %>
+<script>
+    Swal.fire({
+        title: 'Hello!',
+        text: 'Client Created.....',
+        icon: 'success',
+        confirmButtonText: 'OK'
+    });
+</script>
+<% } %>
+
+<jsp:include page="/Includes/footer.jsp"/>
 </body>
 </html>

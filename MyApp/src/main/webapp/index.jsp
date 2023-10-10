@@ -7,6 +7,10 @@
 <body>
 <div class="w-screen h-screen flex flex-col  items-center bg-amber-100 justify-around">
     <div class="flex flex-col justify-around  rounded py-10 bg-amber-500 w-1/3	 ">
+        <div class="w-full flex justify-around"><a href="clientlist">
+            <h1 class="bg-white py-2 my-5  rounded px-5 w-48 flex justify-center  cursor-pointer hover:bg-amber-300 border-2 border-white ">
+                Show All Client</h1></a>
+        </div>
         <div class="w-full flex justify-around"><a href="addclient">
             <h1 class="bg-white py-2 my-5  rounded px-5 w-48 flex justify-center  cursor-pointer hover:bg-amber-300 border-2 border-white ">
                 Create Client</h1></a>
