@@ -1,7 +1,6 @@
 package com.example.myapp.Implementations;
 
 
-
 import com.example.myapp.Entities.Client;
 import com.example.myapp.Helpers.DatabaseConnection;
 import com.example.myapp.Interfaces.ClientInter;
@@ -18,7 +17,8 @@ public class ClientImpl implements ClientInter {
     @Override
     public Optional<Client> save(Client client) {
         try {
-            String query = "INSERT INTO client(nom, prenom, datedenaissance, telephone, code, adresse) VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO client(nom, prenom, datedenaissance, telephone, code, adresse) VALUES (?, ?, ?, ?, ?, ?) " +
+                    "RETURNING *";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, client.getNom());
             statement.setString(2, client.getPrenom());
@@ -26,8 +26,19 @@ public class ClientImpl implements ClientInter {
             statement.setString(4, client.getTelephone());
             statement.setString(5, client.getCode());
             statement.setString(6, client.getAdresse());
-            statement.execute();
-            return Optional.of(client);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                Client client1 = new Client();
+                client1.setNom(resultSet.getString("nom"));
+                client1.setPrenom(resultSet.getString("prenom"));
+                client1.setTelephone(resultSet.getString("telephone"));
+                client1.setCode(resultSet.getString("code"));
+                client1.setAdresse(resultSet.getString("adresse"));
+                client1.setDateDeNaissance(LocalDate.parse(resultSet.getString("datedenaissance")));
+                return Optional.of(client1);
+            } else {
+                return Optional.empty();
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -45,7 +56,7 @@ public class ClientImpl implements ClientInter {
             statement.setString(4, client.getAdresse());
             statement.setDate(5, Date.valueOf(client.getDateDeNaissance().toString()));
             statement.setString(6, client.getCode());
-            if (statement.executeUpdate()==0){
+            if (statement.executeUpdate() == 0) {
                 return Optional.empty();
             }
             return Optional.of(client);
@@ -96,7 +107,7 @@ public class ClientImpl implements ClientInter {
 
     @Override
     public List<Client> findAll() {
-            List<Client> clientList = new ArrayList<Client>();
+        List<Client> clientList = new ArrayList<Client>();
         try {
             String query = "SELECT nom, prenom, telephone, code, adresse, datedenaissance FROM client;";
             Statement statement = connection.createStatement();
@@ -119,7 +130,7 @@ public class ClientImpl implements ClientInter {
 
     @Override
     public List<Client> findByAtr(String text) {
-            List<Client> clientList = new ArrayList<Client>();
+        List<Client> clientList = new ArrayList<Client>();
         try {
             String query = "SELECT nom, prenom, telephone, code, adresse, datedenaissance FROM client WHERE nom LIKE ? OR prenom LIKE ? OR telephone LIKE ? OR code LIKE ? OR adresse LIKE ? ;";
             PreparedStatement preparedStatement = connection.prepareStatement(query);

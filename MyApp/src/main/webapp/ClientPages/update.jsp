@@ -10,52 +10,52 @@
 <html>
 <head>
     <title>Title</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="../style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<jsp:include page="/Includes/header.jsp"/>
 <% Client client = (Client) request.getAttribute("client"); %>
-<form action="/updateclient?code=<%= client.getCode() %>" method="post">
-    <div class="w-screen h-screen flex flex-col  items-center bg-amber-100 justify-around">
-        <div class="flex flex-col justify-around  rounded py-10 bg-amber-500 w-1/3	 ">
-            <div class="flex items-center w-full  mb-5 px-5">
-                <label for="nom" class="block mb-2 text-sm font-medium w-40 text-gray-900 dark:text-white">Nom :</label>
-                <input value="<%= client.getNom() %>" type="text" id="nom" name="nom"
-                       class="bg-gray-50 border border-gray-300 ml-5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+<form class="countiner" action="/updateclient?code=<%= client.getCode() %>" method="post">
+    <div class="mini-countiner" style="position: relative">
+        <a href="./clientlist"><span style="position: absolute;top: 20px;left: 20px;color: var(--bgk);"><-Back</span></a>
+        <div>
+            <div style="display: flex; margin-top: 1rem;margin-bottom: 1rem;align-items: center">
+                <label for="nom">Nom :</label>
+                <input class="inputOfCreateUpdate" value="<%= client.getNom() %>" type="text" id="nom" name="nom"
                        placeholder="Montana" required>
             </div>
-            <div class="flex items-center w-full  mb-5 px-5">
-                <label for="prenom" class="block mb-2 text-sm font-medium w-40 text-gray-900 dark:text-white">Prenom
+            <div style="display: flex; margin-top: 1rem;margin-bottom: 1rem;align-items: center">
+                <label for="prenom">Prenom
                     :</label>
-                <input value="<%= client.getPrenom() %>" type="text" id="prenom" name="prenom"
-                       class="bg-gray-50 border border-gray-300 ml-5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                <input class="inputOfCreateUpdate" value="<%= client.getPrenom() %>" type="text" id="prenom" name="prenom"
+
                        placeholder="Max b" required>
             </div>
-            <div class="flex items-center w-full  mb-5 px-5">
-                <label for="dateDeNaissance" class="block mb-2 text-sm font-medium w-40 text-gray-900 dark:text-white">Date
+            <div style="display: flex; margin-top: 1rem;margin-bottom: 1rem;align-items: center">
+                <label for="dateDeNaissance">Date
                     De
                     Naissance :</label>
-                <input value="<%= client.getDateDeNaissance() %>" type="date" id="dateDeNaissance" name="dateDeNaissance"
-                       class="bg-gray-50 border border-gray-300 ml-5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                <input class="inputOfCreateUpdate" value="<%= client.getDateDeNaissance() %>" type="date" id="dateDeNaissance"
+                       name="dateDeNaissance"
+
                        placeholder="John" required>
             </div>
-            <div class="flex items-center w-full  mb-5 px-5">
-                <label for="telephone" class="block mb-2 text-sm font-medium w-40 text-gray-900 dark:text-white">Numero
+            <div style="display: flex; margin-top: 1rem;margin-bottom: 1rem;align-items: center">
+                <label for="telephone">Numero
                     de
                     Telephone :</label>
-                <input value="<%= client.getTelephone() %>" type="text" id="telephone" name="telephone"
-                       class="bg-gray-50 border border-gray-300 ml-5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                <input class="inputOfCreateUpdate" value="<%= client.getTelephone() %>" type="text" id="telephone" name="telephone"
+
                        placeholder="+2126485533" required>
             </div>
-            <div class="flex items-center w-full  mb-5 px-5">
-                <label for="adresse" class="block mb-2 text-sm font-medium w-40 text-gray-900 dark:text-white">Adresse
+            <div style="display: flex; margin-top: 1rem;margin-bottom: 1rem;align-items: center">
+                <label for="adresse">Adresse
                     :</label>
                 <input type="text" id="adresse" name="adresse" value="<%= client.getAdresse() %>"
-                       class="bg-gray-50 border border-gray-300 ml-5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+
                        placeholder="Attaouia , Zitouna, 181" required>
             </div>
-            <div class="flex items-center w-full justify-center    mb-5 px-5">
-                <button class="bg-white py-1 px-10 w-48 rounded" type="submit">
+            <div style="display: flex;justify-content: center;width: 100%">
+                <button type="submit">
                     Update
                 </button>
             </div>
@@ -77,6 +77,5 @@
 </script>
 <% } %>
 
-<jsp:include page="/Includes/footer.jsp"/>
 </body>
 </html>

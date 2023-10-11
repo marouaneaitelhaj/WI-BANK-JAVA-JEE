@@ -11,14 +11,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @WebServlet(urlPatterns = {"/addclient", "/clientlist", "/updateclient"})
 public class ClientServlet extends HttpServlet {
-    ClientInter clientInter = (ClientInter) new ClientImpl();
+    ClientInter clientInter = new ClientImpl();
     ClientService clientService = new ClientService(clientInter);
 
     @Override
@@ -36,9 +35,7 @@ public class ClientServlet extends HttpServlet {
             case "/updateclient":
                 String code = req.getParameter("code");
                 Optional<Client> client = clientInter.findOne(new Client(code));
-                if (client.isEmpty()) {
-
-                } else {
+                if (client.isPresent()) {
                     req.setAttribute("client", client.get());
                     req.getRequestDispatcher("ClientPages/update.jsp").forward(req, resp);
                 }
@@ -59,23 +56,19 @@ public class ClientServlet extends HttpServlet {
                 client.setTelephone(req.getParameter("telephone"));
                 client.setCode(req.getParameter("code"));
                 client.setAdresse(req.getParameter("adresse"));
-                if (this.clientService.save(client)) {
-                    req.setAttribute("created", true);
+                try {
+                    if (this.clientService.save(client)) {
+                        req.setAttribute("created", true);
+                        req.getRequestDispatcher("ClientPages/create.jsp").forward(req, resp);
+                    }
+                } catch (Exception e) {
+                    req.setAttribute("alert", true);
                     req.getRequestDispatcher("ClientPages/create.jsp").forward(req, resp);
                 }
                 break;
             case "/updateclient":
-                Client client1 = new Client();
-                client1.setNom(req.getParameter("nom"));
-                client1.setPrenom(req.getParameter("prenom"));
-                client1.setDateDeNaissance(LocalDate.parse(req.getParameter("dateDeNaissance")));
-                client1.setTelephone(req.getParameter("telephone"));
-                client1.setCode(req.getParameter("code"));
-                System.out.println("helooooooo " + client1.getCode());
-                client1.setAdresse(req.getParameter("adresse"));
-                Optional<Client> optionalClient = clientInter.update(client1);
-                if (optionalClient.isEmpty()) {
-                } else {
+                Optional<Client> optionalClient = clientService.update(req);
+                if (optionalClient.isPresent()) {
                     req.setAttribute("client", optionalClient.get());
                     req.setAttribute("updated", true);
                     req.getRequestDispatcher("ClientPages/update.jsp").forward(req, resp);

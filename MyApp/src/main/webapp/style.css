@@ -1,0 +1,98 @@
+:root {
+    --bgk: #F36B01;
+    --miniBgk: white
+}
+body{
+    margin: 0;
+}
+*{
+    font-family: Bahnschrift;
+    color: black;
+}
+.countiner {
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bgk);
+    margin: 0;
+}
+#atr{
+    border: 0;
+}
+.mini-countiner {
+    display: flex;
+    width: 40%;
+    height: 45%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--miniBgk);
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+    border-radius: 25px;
+}
+.indexOptions{
+    background-color: var(--bgk);
+    padding: 1rem 3rem;
+    border-radius: 24px;
+    max-height: 4rem;
+    border-color: var(--bgk);
+    border-style: solid;
+    color: white;
+}
+.indexOptions:hover{
+    background-color: var(--miniBgk);
+    color: var(--bgk);
+}
+a{
+    text-decoration: none;
+}
+#myTable{
+    padding: 2rem 3rem;
+    width: 90%;
+    background-color: white;
+    border-radius: 24px;
+}
+th{
+    text-align: left;
+}
+input{
+    border-radius: 24px;
+    border: thin solid black;
+    height: 2rem;
+    width: 15rem;
+    padding-left: 2rem;
+}
+input:focus{
+   outline: none;
+}
+button{
+    padding: 0.5rem 3rem;
+    border-radius: 24px;
+    border-style: solid;
+    border-color: var(--bgk);
+    background-color: var(--bgk);
+    color: white;
+}
+button:hover{
+    color: var(--bgk);
+    background-color: white;
+}
+#searchbtn{
+    padding: 0.5rem 3rem;
+    border-radius: 24px;
+    border-style: solid;
+    border-color: var(--miniBgk);
+    background-color: var(--miniBgk);
+    color: var(--bgk);
+}
+#searchbtn:hover{
+    color: var(--miniBgk);
+    background-color: var(--bgk);
+}
+label{
+    display: flex;
+    width: 15rem;
+}
