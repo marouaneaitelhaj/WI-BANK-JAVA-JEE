@@ -15,10 +15,9 @@ public class ClientImpl implements ClientInter {
     Connection connection = DatabaseConnection.getInstance().getConnection();
 
     @Override
-    public Optional<Client> save(Client client) {
+    public Optional<Client> save(Client client) throws Exception {
         try {
-            String query = "INSERT INTO client(nom, prenom, datedenaissance, telephone, code, adresse) VALUES (?, ?, ?, ?, ?, ?) " +
-                    "RETURNING *";
+            String query = "INSERT INTO client(nom, prenom, datedenaissance, telephone, code, adresse) VALUES (?, ?, ?, ?, ?, ?) " + "RETURNING *";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, client.getNom());
             statement.setString(2, client.getPrenom());
@@ -40,7 +39,9 @@ public class ClientImpl implements ClientInter {
                 return Optional.empty();
             }
         } catch (Exception e) {
-            System.out.println(e);
+            if (e.getMessage().contains("duplicate key value violates unique constraint")) {
+                throw new Exception("Code is already used");
+            }
         }
         return Optional.empty();
     }
@@ -60,8 +61,8 @@ public class ClientImpl implements ClientInter {
                 return Optional.empty();
             }
             return Optional.of(client);
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception ignored) {
+
         }
         return Optional.empty();
     }
@@ -96,8 +97,10 @@ public class ClientImpl implements ClientInter {
                 client.setCode(resultSet.getString("code"));
                 client.setAdresse(resultSet.getString("adresse"));
                 client.setDateDeNaissance(LocalDate.parse(resultSet.getString("datedenaissance")));
+                return Optional.of(client);
+            } else {
+                return Optional.empty();
             }
-            return Optional.of(client);
         } catch (Exception e) {
             System.out.println(e);
         }

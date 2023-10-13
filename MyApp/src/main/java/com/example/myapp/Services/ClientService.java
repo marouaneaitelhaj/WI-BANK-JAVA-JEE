@@ -15,15 +15,18 @@ public class ClientService {
         this.clientInter = clientInter;
     }
 
-    public boolean save(Client client) throws Exception {
+    public boolean save(HttpServletRequest req) throws Exception {
+        Client client = new Client();
+        client.setNom(req.getParameter("nom"));
+        client.setPrenom(req.getParameter("prenom"));
+        client.setDateDeNaissance(LocalDate.parse(req.getParameter("dateDeNaissance")));
+        client.setTelephone(req.getParameter("telephone"));
+        client.setCode(req.getParameter("code"));
+        client.setAdresse(req.getParameter("adresse"));
         if (client.getPrenom().isEmpty() || client.getNom().isEmpty() || client.getCode().isEmpty() || client.getAdresse().isEmpty()) {
             throw new Exception("Please fill all inputs");
         } else {
-            if (this.clientInter.save(client).isEmpty()) {
-                return false;
-            } else {
-                return true;
-            }
+            return this.clientInter.save(client).isPresent();
         }
     }
 
@@ -38,8 +41,20 @@ public class ClientService {
         client1.setDateDeNaissance(LocalDate.parse(req.getParameter("dateDeNaissance")));
         client1.setTelephone(req.getParameter("telephone"));
         client1.setCode(req.getParameter("code"));
-        System.out.println("helooooooo " + client1.getCode());
         client1.setAdresse(req.getParameter("adresse"));
         return clientInter.update(client1);
+    }
+
+    public List<Client> findByAtr(String atr) {
+        return clientInter.findByAtr(atr);
+    }
+
+    public Optional<Client> findOne(Client client) {
+        return clientInter.findOne(client);
+    }
+
+    public int delete(String code) {
+        Client client = new Client(code);
+        return clientInter.delete(client);
     }
 }

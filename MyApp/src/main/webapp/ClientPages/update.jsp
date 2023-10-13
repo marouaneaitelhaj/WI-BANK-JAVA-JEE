@@ -1,5 +1,7 @@
 <%@ page import="com.example.myapp.Entities.Person" %>
-<%@ page import="com.example.myapp.Entities.Client" %><%--
+<%@ page import="com.example.myapp.Entities.Client" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%--
   Created by IntelliJ IDEA.
   User: MAROUANE
   Date: 10/9/2023
@@ -13,20 +15,19 @@
     <link href="../style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<% Client client = (Client) request.getAttribute("client"); %>
-<form class="countiner" action="/updateclient?code=<%= client.getCode() %>" method="post">
+<form class="countiner" action="/updateclient?code=${client.getCode()}" method="post">
     <div class="mini-countiner" style="position: relative">
         <a href="./clientlist"><span style="position: absolute;top: 20px;left: 20px;color: var(--bgk);"><-Back</span></a>
         <div>
             <div style="display: flex; margin-top: 1rem;margin-bottom: 1rem;align-items: center">
                 <label for="nom">Nom :</label>
-                <input class="inputOfCreateUpdate" value="<%= client.getNom() %>" type="text" id="nom" name="nom"
+                <input class="inputOfCreateUpdate" value="${client.getNom()}" type="text" id="nom" name="nom"
                        placeholder="Montana" required>
             </div>
             <div style="display: flex; margin-top: 1rem;margin-bottom: 1rem;align-items: center">
                 <label for="prenom">Prenom
                     :</label>
-                <input class="inputOfCreateUpdate" value="<%= client.getPrenom() %>" type="text" id="prenom" name="prenom"
+                <input class="inputOfCreateUpdate" value="${client.getPrenom()}" type="text" id="prenom" name="prenom"
 
                        placeholder="Max b" required>
             </div>
@@ -34,7 +35,7 @@
                 <label for="dateDeNaissance">Date
                     De
                     Naissance :</label>
-                <input class="inputOfCreateUpdate" value="<%= client.getDateDeNaissance() %>" type="date" id="dateDeNaissance"
+                <input class="inputOfCreateUpdate" value="${client.getDateDeNaissance()}" type="date" id="dateDeNaissance"
                        name="dateDeNaissance"
 
                        placeholder="John" required>
@@ -43,14 +44,14 @@
                 <label for="telephone">Numero
                     de
                     Telephone :</label>
-                <input class="inputOfCreateUpdate" value="<%= client.getTelephone() %>" type="text" id="telephone" name="telephone"
+                <input class="inputOfCreateUpdate" value="${client.getTelephone()}" type="text" id="telephone" name="telephone"
 
                        placeholder="+2126485533" required>
             </div>
             <div style="display: flex; margin-top: 1rem;margin-bottom: 1rem;align-items: center">
                 <label for="adresse">Adresse
                     :</label>
-                <input type="text" id="adresse" name="adresse" value="<%= client.getAdresse() %>"
+                <input type="text" id="adresse" name="adresse" value="${client.getAdresse()}"
 
                        placeholder="Attaouia , Zitouna, 181" required>
             </div>
@@ -67,14 +68,6 @@
 %>
 
 <% if (updated != null && updated) { %>
-<script>
-    Swal.fire({
-        title: 'Hello!',
-        text: 'Client Updated.....',
-        icon: 'success',
-        confirmButtonText: 'OK'
-    });
-</script>
 <% } %>
 
 </body>
